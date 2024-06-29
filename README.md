@@ -1,2 +1,2 @@
-# F-rum_Hub
+# Fórum_Hub
 Aplicação Java com Spring framework para criar uma API REST para um fórum
