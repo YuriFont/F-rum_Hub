@@ -36,4 +36,10 @@ public class Topic {
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL)
     private List<Reply> replies = new ArrayList<>();
 
+    public Topic(String title, String message, User user, Course course) {
+        this.title = title;
+        this.message = message;
+        this.user = user;
+        this.course = course;
+    }
 }
