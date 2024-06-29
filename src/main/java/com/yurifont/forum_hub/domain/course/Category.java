@@ -1,0 +1,14 @@
+package com.yurifont.forum_hub.domain.course;
+
+public enum Category {
+    WEB_DEVELOPMENT,
+    MOBILE_APP_DEVELOPMENT,
+    DATA_SCIENCE,
+    MACHINE_LEARNING,
+    CYBERSECURITY,
+    CLOUD_COMPUTING,
+    DEVOPS,
+    DATABASE_MANAGEMENT,
+    BLOCKCHAIN_TECHNOLOGY,
+    ARTIFICIAL_INTELLIGENCE
+}
