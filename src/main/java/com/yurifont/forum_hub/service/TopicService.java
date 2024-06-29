@@ -38,7 +38,7 @@ public class TopicService {
 
         User user = userRepository.getReferenceById(data.idUser());
         Course course = courseRepository.getReferenceById(data.idCourse());
-        Topic topic = new Topic(data.title(), data.message(), user, course);
+        Topic topic = new Topic(data.title(), data.message(), data.creationDate(), user, course);
 
         Topic topicSave = topicRepository.save(topic);
 

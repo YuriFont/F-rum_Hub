@@ -1,7 +1,10 @@
 package com.yurifont.forum_hub.domain.user;
 
+import com.yurifont.forum_hub.domain.user.dto.RegisterUserData;
 import jakarta.persistence.*;
 import lombok.*;
+
+import org.mindrot.jbcrypt.BCrypt;
 
 @Table(name = "users")
 @Entity(name = "User")
@@ -20,5 +23,15 @@ public class User {
     @Column(unique = true)
     private String email;
     private String password;
+
+    public User(RegisterUserData data) {
+        this.name = data.name();
+        this.email = data.email();
+        this.password = hashPassword(data.password());
+    }
+
+    public String hashPassword(String plainTextPassword) {
+        return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
+    }
 
 }

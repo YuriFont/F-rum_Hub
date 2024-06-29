@@ -1,6 +1,7 @@
 package com.yurifont.forum_hub.domain.course;
 
 
+import com.yurifont.forum_hub.domain.course.dto.RegisterCourseData;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,4 +21,8 @@ public class Course {
     private String name;
     private Category category;
 
+    public Course(RegisterCourseData data) {
+        this.name = data.name();
+        this.category = data.category();
+    }
 }
