@@ -42,6 +42,6 @@ public class TopicService {
 
         Topic topicSave = topicRepository.save(topic);
 
-        return new TopicDetailsData(topicSave.getId(), topicSave.getUser().getId(), topicSave.getCourse().getId(), topicSave.getCreationDate());
+        return new TopicDetailsData(topicSave.getId(), topicSave.getTitle(), topicSave.getUser().getId(), topicSave.getCourse().getId(), topicSave.getCreationDate());
     }
 }

@@ -38,9 +38,15 @@ public class TopicController {
     public ResponseEntity<List<TopicDetailsData>> list() {
         List<Topic> list = topicRepository.findAll();
         List<TopicDetailsData> listDTO = list.stream()
-                .map(t -> new TopicDetailsData(t.getId(), t.getUser().getId(), t.getCourse().getId(), t.getCreationDate()))
+                .map(t -> new TopicDetailsData(t.getId(), t.getTitle(), t.getUser().getId(), t.getCourse().getId(), t.getCreationDate()))
                 .toList();
         return ResponseEntity.ok(listDTO);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity getById(@PathVariable Long id) {
+        Topic topic = topicRepository.getReferenceById(id);
+        return ResponseEntity.ok(new TopicDetailsData(topic));
     }
 
 }
