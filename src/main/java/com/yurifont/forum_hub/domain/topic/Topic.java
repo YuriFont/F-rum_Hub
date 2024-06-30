@@ -2,8 +2,10 @@ package com.yurifont.forum_hub.domain.topic;
 
 import com.yurifont.forum_hub.domain.course.Course;
 import com.yurifont.forum_hub.domain.reply.Reply;
+import com.yurifont.forum_hub.domain.topic.dto.UpdateTopicData;
 import com.yurifont.forum_hub.domain.user.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Future;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -44,5 +46,14 @@ public class Topic {
         this.status = Status.ACTIVE;
         this.user = user;
         this.course = course;
+    }
+
+    public void update(UpdateTopicData data) {
+        if (data.title() != null)
+            this.title = data.title();
+        if (data.message() != null)
+            this.message = data.message();
+        if (data.status() != null)
+            this.status = data.status();
     }
 }

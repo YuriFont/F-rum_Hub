@@ -3,10 +3,13 @@ package com.yurifont.forum_hub.controllers;
 import com.yurifont.forum_hub.domain.topic.Topic;
 import com.yurifont.forum_hub.domain.topic.dto.RegisterTopicData;
 import com.yurifont.forum_hub.domain.topic.dto.TopicDetailsData;
+import com.yurifont.forum_hub.domain.topic.dto.UpdateTopicData;
 import com.yurifont.forum_hub.repositories.TopicRepository;
 import com.yurifont.forum_hub.service.TopicService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/topicos")
@@ -47,6 +51,16 @@ public class TopicController {
     public ResponseEntity getById(@PathVariable Long id) {
         Topic topic = topicRepository.getReferenceById(id);
         return ResponseEntity.ok(new TopicDetailsData(topic));
+    }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity updateTopic(@RequestBody @Valid UpdateTopicData data) {
+        Optional<Topic> topic = topicRepository.findById(data.id());
+
+        if (topic.isPresent())
+            topic.get().update(data);
+        return ResponseEntity.ok(new TopicDetailsData(topic.get()));
     }
 
 }
