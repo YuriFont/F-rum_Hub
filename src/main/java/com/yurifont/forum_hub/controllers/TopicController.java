@@ -63,4 +63,13 @@ public class TopicController {
         return ResponseEntity.ok(new TopicDetailsData(topic.get()));
     }
 
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity delete(@PathVariable Long id) {
+        Optional<Topic> topic = topicRepository.findById(id);
+        topic.ifPresent(value -> topicRepository.delete(value));
+
+        return ResponseEntity.noContent().build();
+    }
+
 }
